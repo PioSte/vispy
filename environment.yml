@@ -1,0 +1,12 @@
+# run: conda env create --file environment.yml
+name: vispy
+channels:
+  - conda-forge
+dependencies:
+  - python=3.7
+  - matplotlib
+  - scipy [--no-deps]
+  - scikit-image [--no-deps]
+  - tifffile [--no-deps]
+  - pillow [--no-deps]
+  - h5py [--no-deps]
