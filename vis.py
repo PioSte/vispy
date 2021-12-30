@@ -11,13 +11,14 @@ class IndexTracker:
 
         self.X = X
         self.current_axis_size = self.X.shape[self.current_axis]
-        
+        # self.X_rot = self.X.copy()
+        # rows, cols, self.slices = X.shape
         self.ind = self.X.shape[self.current_axis]//2
 
         self.y_mouse_prev = None
 
         self.im = self.ax.imshow(self.X[:, :, self.ind])
-        
+        # self.im = self.ax.imshow(self.X_rot[:, :, self.ind])
         self.fig.colorbar(self.im, ax=self.ax)
 
         self.update()
@@ -68,4 +69,22 @@ def vis(vol, sliced_axis=2, axis_labels=['y','x','z']):
 
 
 if __name__ == "__main__":
+    import numpy as np
+    sampling = 100
+    x = np.linspace(-1, 1, sampling)
+    y = x.copy() + 0.1
+    z = x.copy() - 0.2
+
+    x = x[..., np.newaxis, np.newaxis]
+    y = y[np.newaxis, ..., np.newaxis]
+    z = z[np.newaxis, np.newaxis, ...]
+    
+    # x, y, z = np.meshgrid(x, y, z)
+    r = np.sqrt(x**2 + y**2 + z**2)
+
+    # ball = np.zeros_like(x)
+    ball = np.zeros((sampling, sampling, sampling))
+    ball[r < 0.8] = 1
+
+    vis(ball)
     test = 1
